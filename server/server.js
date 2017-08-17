@@ -1,6 +1,7 @@
 var express = require('express'),
 	bps		= require('body-parser'),
-	morgan	= require('morgan');
+	morgan	= require('morgan'),
+	api     = require('../api/api.js');
 
 // initialize express
 var app = express();
@@ -11,6 +12,7 @@ app.use(bps.urlencoded({extended: false}))
 app.use(bps.json());
 
 // mount all routes/endpoints here
+app.use('/api/v1', api);
 
 // setup application error handler
 app.use(function (err, req, res, next) {

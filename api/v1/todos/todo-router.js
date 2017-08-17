@@ -4,5 +4,7 @@ var express 		= require('express'),
 
 
 todoRouter.post('/', todoController.addTodo)
+todoRouter.get('/', todoController.fetchAllTodos)
+todoRouter.get('/:id', todoController.fetchTodo)
 
 module.exports = todoRouter;

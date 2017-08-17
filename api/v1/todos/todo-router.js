@@ -12,7 +12,3 @@ todoRouter.route('/:id')
 	.get(todoController.fetchTodo)
 
 module.exports = todoRouter;
-
-chai
-mocha -g
-supertest

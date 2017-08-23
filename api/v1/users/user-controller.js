@@ -11,7 +11,11 @@ exports.addUser = function(req, res, next) {
 			return next(err)
 		}
 
+		// make user a true object
+		user = user.toObject();
 		var token = auth.sign(user._id);
-		res.status(200).json({token: token});
+		user["_token"] = token
+
+		res.status(200).json(user);
 	})
 }

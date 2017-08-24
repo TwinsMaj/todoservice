@@ -1,5 +1,34 @@
 var expressjwt = require("express-jwt"),
-	jwt 	   = require("jsonwebtoken");
+	jwt 	   = require("jsonwebtoken"),
+	userModel  = require("../users/user-model.js");
+
+exports.verifyUser = function(req, res, next) {
+	var username = req.body.username,
+		password = req.body.password;
+
+	if(!username || !password) {
+		req.errstatus = 501
+		return next(new Error("please provide login details"))
+	}
+
+	userModel.findOne({username: username})
+		.then(function(user) {
+			// validate the password
+			if(!user.authenticate(password)) {
+				req.errstatus = 501
+				return next(new Error("either username or password is incorrect"))
+			}
+
+			req.user = user;
+			next();
+		}, function(err) {
+			if(err) {
+				req.errstatus = 500
+				return next(err);
+			}
+		})
+}
+
 
 exports.sign = function(id) {
 	return jwt.sign(

@@ -1,6 +1,7 @@
 var auth	= require('./auth.js');
 
 exports.signIn = function(req, res, next) {
+	console.log(req.user);
 	var user = req.user.toObject(),
 		token = auth.sign(user._id);
 

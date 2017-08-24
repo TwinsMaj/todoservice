@@ -5,7 +5,7 @@ var expressjwt = require("express-jwt"),
 
 exports.decodeToken = function(req, res, next) {
 	req.errstatus = 501
-	checkToken(req, res, next)
+	checkToken(req, res, next) 
 }
 
 

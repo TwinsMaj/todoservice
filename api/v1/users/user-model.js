@@ -1,12 +1,14 @@
 var mongoose = require('mongoose'),
 	bcrypt	 = require('bcrypt-nodejs'),
+	Schema   = mongoose.Schema,
 	UserSchema;
 
 mongoose.connect("mongodb://localhost/todos")
 
 UserSchema = mongoose.Schema({
 	username: {unique: true, required: true, type: String},
-	password: {required:true, type:String}
+	password: {required:true, type:String},
+	todos: [{type: Schema.Types.ObjectId, ref: "tasks"}]
 })
 
 UserSchema.pre('save', function(next) {

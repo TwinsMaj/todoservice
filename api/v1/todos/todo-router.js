@@ -7,7 +7,7 @@ todoRouter.param("id", todoController.intercept)
 
 todoRouter.route('/')
 	.post(auth.decodeToken, todoController.addTodo)
-	.get(todoController.fetchAllTodos)
+	.get(auth.decodeToken, todoController.fetchAllTodos)
 
 todoRouter.route('/:id')
 	.get(todoController.fetchTodo)

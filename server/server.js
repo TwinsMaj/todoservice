@@ -16,7 +16,7 @@ app.use('/api/v1', api);
 
 // setup application error handler
 app.use(function (err, req, res, next) {
-	res.send(req.errstatus).json(err.message);
+	res.status(req.errstatus).json(err.message);
 })
 
 // export the application object

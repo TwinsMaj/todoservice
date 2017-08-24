@@ -1,6 +1,13 @@
 var expressjwt = require("express-jwt"),
 	jwt 	   = require("jsonwebtoken"),
-	userModel  = require("../users/user-model.js");
+	userModel  = require("../users/user-model.js"),
+	checkToken = expressjwt({secret: "jsonweb"});
+
+exports.decodeToken = function(req, res, next) {
+	req.errstatus = 501
+	checkToken(req, res, next)
+}
+
 
 exports.verifyUser = function(req, res, next) {
 	var username = req.body.username,

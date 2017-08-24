@@ -1,11 +1,12 @@
 var express 		= require('express'),
 	todoRouter      = express.Router(),
+	auth			= require('../auth/auth.js'),
 	todoController  = require('./todo-controller.js');
 
 todoRouter.param("id", todoController.intercept)
 
 todoRouter.route('/')
-	.post(todoController.addTodo)
+	.post(auth.decodeToken, todoController.addTodo)
 	.get(todoController.fetchAllTodos)
 
 todoRouter.route('/:id')
